@@ -37,7 +37,7 @@
     const dayQuery = day === undefined ? "" : `day=${day}`;
 
     const res = await fetch(
-      `http://localhost:8000/log/total?${yearQuery}${monthQuery}${dayQuery}`
+      `http://34.127.13.199:8000/log/total?${yearQuery}${monthQuery}${dayQuery}`
     )
 
     return res;
