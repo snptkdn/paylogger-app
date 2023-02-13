@@ -1,7 +1,7 @@
 <script lang="ts">
   const fetchTodayAmount = async() => {
     const today = new Date();
-    const res = await getAmountOfRange(today.getFullYear(), today.getMonth(), today.getDate());
+    const res = await getAmountOfRange(today.getFullYear(), today.getMonth()+1, today.getDate());
 
     if (res) {
       return res.json();
@@ -12,7 +12,7 @@
 
   const fetchThisMonthAmount = async() => {
     const today = new Date();
-    const res = await getAmountOfRange(today.getFullYear(), today.getMonth(), undefined);
+    const res = await getAmountOfRange(today.getFullYear(), today.getMonth()+1, undefined);
 
     if (res) {
       return res.json();
