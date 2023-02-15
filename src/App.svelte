@@ -64,7 +64,7 @@
   let thismonth_amount = fetchThisMonthAmount();
   let total_amount = fetchTotalAmount();
   let categories = fetchCategories();
-  let sel;
+  let sel:BigInt;
 </script>
 
 <main>
@@ -92,12 +92,11 @@
   <h2>
     {#await categories then categories}
      <select bind:value={sel}>
-      <option value="">選択</option>
+      <option value="">Category</option>
       {#each categories as category}
         <option value={category.id} >{category.name}</option>
       {/each}
       </select>
-      <p>選択された値:<span id="txt" >{ sel }</span></p>
     {/await}
   </h2>
 
