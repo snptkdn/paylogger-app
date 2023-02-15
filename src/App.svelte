@@ -31,6 +31,16 @@
     }
   }
 
+  const fetchCategories = async() => {
+    const res = await getCategories();
+
+    if (res) {
+      return res.json();
+    } else {
+      throw new Error("Error");
+    }
+  }
+
   async function getAmountOfRange(year?: number, month?: number, day?: number): Promise<Response> {
     const yearQuery = year === undefined? "" : `year=${year}&`;
     const monthQuery = month === undefined ? "" : `month=${month}&`;
@@ -43,9 +53,18 @@
     return res;
   }
 
+  async function getCategories(): Promise<Response> {
+    return await fetch(
+      "http://34.127.13.199:8000/category"
+    );
+  }
+
+
   let today_amount = fetchTodayAmount();
   let thismonth_amount = fetchThisMonthAmount();
   let total_amount = fetchTotalAmount();
+  let categories = fetchCategories();
+  let sel;
 </script>
 
 <main>
@@ -68,6 +87,17 @@
   <h2>
     {#await thismonth_amount then string}
       THIS MONTH:¥{string}
+    {/await}
+  </h2>
+  <h2>
+    {#await categories then categories}
+     <select bind:value={sel}>
+      <option value="">選択</option>
+      {#each categories as category}
+        <option value={category.id} >{category.name}</option>
+      {/each}
+      </select>
+      <p>選択された値:<span id="txt" >{ sel }</span></p>
     {/await}
   </h2>
 
